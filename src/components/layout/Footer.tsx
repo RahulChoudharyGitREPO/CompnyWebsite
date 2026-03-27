@@ -4,13 +4,20 @@ export default function Footer() {
   return (
     <footer className="border-t border-white/10 mt-20">
       <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="flex flex-col gap-2">
-          <Link href="/" className="text-2xl font-bold tracking-tighter text-white">
-            AGENCY<span className="text-gray-500">.</span>
-          </Link>
-          <p className="text-sm text-gray-500 max-w-xs">
-            A modern outsourcing agency delivering state-of-the-art web and mobile solutions.
-          </p>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <Link href="/" className="text-2xl font-bold tracking-tighter text-white">
+              AGENCY<span className="text-gray-500">.</span>
+            </Link>
+            <p className="text-sm text-gray-500 max-w-xs">
+              AI Automation & Software Development for Indian MSMEs and Startups.
+            </p>
+          </div>
+          <div className="flex flex-col gap-1">
+             <p className="text-[10px] text-gray-600 uppercase font-black tracking-widest">Connect</p>
+             <a href="tel:9693975542" className="text-sm text-gray-400 hover:text-white transition-colors">9693975542</a>
+             <a href="tel:7352055910" className="text-sm text-gray-400 hover:text-white transition-colors">7352055910</a>
+          </div>
         </div>
         
         <div className="flex gap-8 text-sm text-gray-400">

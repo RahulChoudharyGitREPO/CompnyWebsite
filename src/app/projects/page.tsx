@@ -2,6 +2,8 @@ import connectDB from "@/lib/mongodb";
 import Project, { IProject } from "@/models/Project";
 import ProjectCard from "@/components/ui/ProjectCard";
 import SectionHeading from "@/components/ui/SectionHeading";
+import ProjectsClient from "@/components/projects/ProjectsClient";
+import { cookies } from "next/headers";
 
 export const metadata = {
   title: "Our Work | Agency",
@@ -15,66 +17,47 @@ export default async function ProjectsPage() {
   let projects: IProject[] = [];
   try {
     await connectDB();
-    const rawProjects = await Project.find({}).sort({ createdAt: -1 });
-    projects = JSON.parse(JSON.stringify(rawProjects));
+    projects = await Project.find({}).sort({ order: 1, createdAt: -1 });
+    projects = JSON.parse(JSON.stringify(projects));
   } catch (error) {
     console.error("DB connection error");
   }
 
-  // Fallback to the requested client projects if DB is empty or offline
-  if (!projects || projects.length === 0) {
-    projects = [
-      {
-        _id: "1",
-        title: "Bhavesh Holiday",
-        description: "A comprehensive travel and holiday booking platform offering seamless user experiences.",
-        techStack: ["React", "Next.js", "Tailwind CSS"],
-        image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1000&auto=format&fit=crop",
-        liveLink: "https://share.google/owwuUEc28hPUOH5kz",
-        createdAt: new Date()
-      },
-      {
-        _id: "2",
-        title: "Leonardi Premium Fashion",
-        description: "An elegant e-commerce platform for high-end digital luxury fashion and accessories.",
-        techStack: ["Next.js", "Shopify API", "Framer Motion"],
-        image: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=1000&auto=format&fit=crop",
-        liveLink: "https://share.google/SnkKTTfux5kvLa5b8",
-        createdAt: new Date()
-      },
-      {
-        _id: "3",
-        title: "VATOM Digital Payments",
-        description: "A secure, lightning-fast digital payment solution tailored for modern enterprise services.",
-        techStack: ["TypeScript", "Node.js", "PostgreSQL"],
-        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1000&auto=format&fit=crop",
-        liveLink: "https://share.google/lWwfY2WKjnLJQCwp9",
-        createdAt: new Date()
-      }
-    ] as unknown as IProject[];
-  }
+  const fallbackProjects: IProject[] = [
+    {
+      _id: "cs1",
+      title: "D2C Brand: WhatsApp Sales Bot",
+      description: "Automated 80% of customer support on WhatsApp. Result: 2.5x increase in repeat orders within 3 months.",
+      techStack: ["WhatsApp API", "AI Agents", "Next.js"],
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop",
+      liveLink: "https://share.google/owwuUEc28hPUOH5kz",
+      createdAt: new Date()
+    },
+    {
+      _id: "cs2",
+      title: "Manufacturing MSME: Inventory Dashboard",
+      description: "Built custom tracking dashboard for raw materials. Result: Saved ₹50,000/month by reducing material waste.",
+      techStack: ["Business BI", "React", "Node.js"],
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000&auto=format&fit=crop",
+      liveLink: "https://share.google/SnkKTTfux5kvLa5b8",
+      createdAt: new Date()
+    },
+    {
+      _id: "cs3",
+      title: "VATOM: AI Predictive Payments",
+      description: "A secure, lightning-fast digital payment solution with AI-driven fraud detection and settlement.",
+      techStack: ["TypeScript", "Node.js", "AI Logic"],
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1000&auto=format&fit=crop",
+      liveLink: "https://share.google/lWwfY2WKjnLJQCwp9",
+      createdAt: new Date()
+    }
+  ] as unknown as IProject[];
 
-  return (
-    <div className="pt-20 px-6 max-w-7xl mx-auto min-h-screen">
-      <div className="py-16">
-        <SectionHeading 
-          title="OUR WORK" 
-          subtitle="A selection of recent digital products we've designed and engineered."
-        />
-        
-        {projects.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-gray-500">
-            <h3 className="text-2xl font-semibold mb-2">No projects yet.</h3>
-            <p>Admin hasn't uploaded any projects to the database.</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
-            {projects.map((project, index) => (
-              <ProjectCard key={project._id as unknown as string} project={project} index={index} />
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
+  // Always show the 3 original placeholders first, then append any real work
+  const allProjects = [...fallbackProjects, ...projects];
+
+  const cookieStore = await cookies();
+  const isAdmin = cookieStore.get("admin_token")?.value ? true : false;
+
+  return <ProjectsClient initialProjects={allProjects} isAdmin={isAdmin} />;
 }

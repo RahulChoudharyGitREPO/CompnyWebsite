@@ -7,6 +7,7 @@ import Link from "next/link";
 import { PlusCircle, Edit } from "lucide-react";
 import LogoutButton from "./LogoutButton";
 import DeleteProjectButton from "./DeleteProjectButton";
+import SortableProjectList from "./SortableProjectList";
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 
@@ -27,7 +28,7 @@ export default async function AdminDashboard() {
   }
 
   await connectDB();
-  const rawProjects = await Project.find({}).sort({ createdAt: -1 });
+  const rawProjects = await Project.find({}).sort({ order: 1, createdAt: -1 });
   const projects = JSON.parse(JSON.stringify(rawProjects)) as IProject[];
 
   return (
@@ -47,42 +48,7 @@ export default async function AdminDashboard() {
 
       <div className="bg-[#0a0a0a] rounded-2xl border border-white/10 overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-white/5 border-b border-white/10">
-                <th className="p-4 font-semibold text-gray-300">Project</th>
-                <th className="p-4 font-semibold text-gray-300">Tech Stack</th>
-                <th className="p-4 font-semibold text-gray-300 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {projects.length === 0 ? (
-                <tr>
-                  <td colSpan={3} className="p-8 text-center text-gray-500">
-                    No projects found. Add your first project!
-                  </td>
-                </tr>
-              ) : (
-                projects.map((project) => (
-                  <tr key={project._id as unknown as string} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                    <td className="p-4 font-medium">{project.title}</td>
-                    <td className="p-4 text-sm text-gray-400">
-                      {project.techStack.join(", ")}
-                    </td>
-                    <td className="p-4 flex gap-3 justify-end">
-                      <Link
-                        href={`/admin/projects/${project._id as unknown as string}/edit`}
-                        className="p-2 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition"
-                      >
-                        <Edit size={16} />
-                      </Link>
-                      <DeleteProjectButton projectId={project._id as unknown as string} />
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+          <SortableProjectList initialProjects={projects} />
         </div>
       </div>
     </div>

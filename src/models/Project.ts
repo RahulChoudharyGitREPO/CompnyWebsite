@@ -6,6 +6,7 @@ export interface IProject extends Document {
   techStack: string[];
   image: string;
   liveLink?: string;
+  order: number;
   createdAt: Date;
 }
 
@@ -29,6 +30,10 @@ const ProjectSchema: Schema = new Schema({
   liveLink: {
     type: String,
     required: false,
+  },
+  order: {
+    type: Number,
+    default: 0,
   },
   createdAt: {
     type: Date,

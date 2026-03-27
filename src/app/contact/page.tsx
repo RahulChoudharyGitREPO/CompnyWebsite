@@ -8,15 +8,34 @@ import toast from "react-hot-toast";
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Mock submit
-    setTimeout(() => {
-      setLoading(false);
+    
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) throw new Error("Failed to send message");
+
       toast.success("Message sent successfully! We'll get back to you soon.");
       (e.target as HTMLFormElement).reset();
-    }, 1500);
+    } catch (error) {
+      toast.error("Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,22 +55,22 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col gap-2">
             <label htmlFor="name" className="text-sm text-gray-400 font-medium">Name</label>
-            <input required type="text" id="name" className="bg-[#111] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors" placeholder="John Doe" />
+            <input required name="name" type="text" id="name" className="bg-[#111] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors" placeholder="John Doe" />
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="email" className="text-sm text-gray-400 font-medium">Email</label>
-            <input required type="email" id="email" className="bg-[#111] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors" placeholder="john@company.com" />
+            <input required name="email" type="email" id="email" className="bg-[#111] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors" placeholder="john@company.com" />
           </div>
         </div>
         
         <div className="flex flex-col gap-2">
           <label htmlFor="subject" className="text-sm text-gray-400 font-medium">Subject</label>
-          <input required type="text" id="subject" className="bg-[#111] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors" placeholder="Web App Development" />
+          <input required name="subject" type="text" id="subject" className="bg-[#111] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors" placeholder="Web App Development" />
         </div>
 
         <div className="flex flex-col gap-2">
           <label htmlFor="message" className="text-sm text-gray-400 font-medium">Project Details</label>
-          <textarea required id="message" rows={5} className="bg-[#111] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors resize-none" placeholder="Tell us about your requirements..."></textarea>
+          <textarea required name="message" id="message" rows={5} className="bg-[#111] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors resize-none" placeholder="Tell us about your requirements..."></textarea>
         </div>
 
         <button 
