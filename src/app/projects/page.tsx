@@ -6,7 +6,7 @@ import ProjectsClient from "@/components/projects/ProjectsClient";
 import { cookies } from "next/headers";
 
 export const metadata = {
-  title: "Our Work | Agency",
+  title: "Our Work | GigtechOrbit",
   description: "Explore our recent projects and technical expertise.",
 };
 

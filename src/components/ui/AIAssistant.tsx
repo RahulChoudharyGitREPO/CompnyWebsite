@@ -21,7 +21,7 @@ export default function AIAssistant() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute inset-0 bg-indigo-500 rounded-full blur-xl"
+          className="absolute inset-0 bg-white/10 rounded-full blur-xl"
         />
 
         {/* Floating AI Button */}
@@ -29,7 +29,7 @@ export default function AIAssistant() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsOpen(!isOpen)}
-          className="relative flex items-center justify-center w-14 h-14 bg-black border border-white/20 rounded-full shadow-[0_0_15px_rgba(99,102,241,0.5)] overflow-hidden group"
+          className="relative flex items-center justify-center w-14 h-14 bg-black border border-white/20 rounded-full shadow-[0_0_15px_rgba(255,255,255,0.1)] overflow-hidden group"
         >
           <motion.div
             animate={{ rotate: 360 }}
@@ -45,18 +45,18 @@ export default function AIAssistant() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          className="fixed bottom-24 right-6 z-50 w-80 h-96 bg-black border border-white/10 rounded-2xl flex flex-col shadow-[0_0_30px_rgba(99,102,241,0.15)] overflow-hidden"
+          className="fixed bottom-24 right-6 z-50 w-80 h-96 bg-black border border-white/10 rounded-2xl flex flex-col shadow-[0_0_30px_rgba(255,255,255,0.05)] overflow-hidden"
         >
           <div className="p-4 border-b border-white/10 flex items-center justify-between bg-white/5">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-indigo-400" />
-              <span className="font-semibold text-sm">Agency AI</span>
+              <Sparkles className="w-4 h-4 text-white/40" />
+              <span className="font-semibold text-sm uppercase tracking-widest font-[family-name:var(--font-outfit)]">GigtechOrbit AI</span>
             </div>
             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
           </div>
           <div className="flex-1 p-4 flex flex-col gap-4 overflow-y-auto">
-            <div className="p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl rounded-tl-sm text-sm text-gray-300">
-              Hello! I'm the Agency AI. How can I help you automate your workflows today?
+            <div className="p-3 bg-white/5 border border-white/10 rounded-2xl rounded-tl-sm text-sm text-gray-300">
+              Hello! I'm the GigtechOrbit AI Assistant. How can I help you automate your workflows today?
             </div>
             {/* Thinking animation */}
             <div className="flex gap-1 items-center px-2">

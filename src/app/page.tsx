@@ -19,29 +19,29 @@ export default async function Home() {
   const fallbackProjects: IProject[] = [
     {
       _id: "cs1",
-      title: "D2C Brand: WhatsApp Sales Bot",
-      description: "Automated 80% of customer support on WhatsApp. Result: 2.5x increase in repeat orders within 3 months.",
-      techStack: ["WhatsApp API", "AI Agents", "Next.js"],
+      title: "B2B SaaS: AI Onboarding Agent",
+      description: "Automated 90% of user onboarding workflows. Result: 25% reduction in Day-1 churn within 60 days.",
+      techStack: ["LLM Agents", "Next.js", "PostgreSQL"],
       image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop",
-      liveLink: "https://share.google/owwuUEc28hPUOH5kz",
+      liveLink: "#",
       createdAt: new Date()
     },
     {
       _id: "cs2",
-      title: "Manufacturing MSME: Inventory Dashboard",
-      description: "Built custom tracking dashboard for raw materials. Result: Saved ₹50,000/month by reducing material waste.",
-      techStack: ["Business BI", "React", "Node.js"],
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000&auto=format&fit=crop",
-      liveLink: "https://share.google/SnkKTTfux5kvLa5b8",
+      title: "Fintech: Smart Reconciliation Engine",
+      description: "Implemented real-time AI reconciliation for transaction flows. Result: Recovered $120k in leaked fees annually.",
+      techStack: ["FinOps AI", "Node.js", "Redis"],
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1000&auto=format&fit=crop",
+      liveLink: "#",
       createdAt: new Date()
     },
     {
       _id: "cs3",
-      title: "VATOM: AI Predictive Payments",
-      description: "A secure, lightning-fast digital payment solution with AI-driven fraud detection and settlement.",
-      techStack: ["TypeScript", "Node.js", "AI Logic"],
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1000&auto=format&fit=crop",
-      liveLink: "https://share.google/lWwfY2WKjnLJQCwp9",
+      title: "E-comm: Predictive Ops Agent",
+      description: "Autonomous inventory management and demand forecasting. Result: 15% reduction in overstock capital.",
+      techStack: ["Predictive AI", "React", "Python"],
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000&auto=format&fit=crop",
+      liveLink: "#",
       createdAt: new Date()
     }
   ] as unknown as IProject[];

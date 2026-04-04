@@ -9,7 +9,7 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Projects", href: "/projects" },
+  { name: "Schedule a Call", href: "#booking" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -20,8 +20,10 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-black/50 border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold tracking-tighter">
-          AGENCY<span className="text-gray-500">.</span>
+        <Link href="/" className="flex items-center gap-1.5 focus:outline-none">
+          <span className="text-xl font-semibold tracking-tight text-white font-[family-name:var(--font-geist-sans)]">
+            Gigtech<span className="text-white/40 font-normal">Orbit</span>
+          </span>
         </Link>
 
         {/* Desktop Menu */}

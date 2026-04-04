@@ -49,7 +49,7 @@ export default function ProjectCard({ project, index, isAdmin = false, onDelete 
         className="h-full"
       >
         <TiltCard className={`group relative flex flex-col bg-[#111] rounded-3xl overflow-hidden border transition-colors h-full ${
-          isDragging ? "border-indigo-500 ring-4 ring-indigo-500/20" : "border-white/5 hover:border-white/20"
+          isDragging ? "border-white/20 ring-4 ring-white/10" : "border-white/5 hover:border-white/20"
         }`}>
           {/* Admin Overlays */}
           {isAdmin && (
@@ -73,7 +73,7 @@ export default function ProjectCard({ project, index, isAdmin = false, onDelete 
               <button
                 {...attributes}
                 {...listeners}
-                className="p-2 bg-indigo-600 rounded-xl text-white cursor-grab active:cursor-grabbing hover:bg-indigo-500 transition-all shadow-lg"
+                className="p-2 bg-white/10 rounded-xl text-white cursor-grab active:cursor-grabbing hover:bg-white/20 transition-all shadow-lg"
                 title="Drag to Reorder"
               >
                 <GripVertical size={16} />

@@ -2,8 +2,8 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ParallaxSection from "@/components/ui/ParallaxSection";
 
 export const metadata = {
-  title: "About Us | Agency",
-  description: "Learn more about our outsourcing agency and team.",
+  title: "About Us | GigtechOrbit",
+  description: "Learn more about the GigtechOrbit team and our mission.",
 };
 
 export default function AboutPage() {

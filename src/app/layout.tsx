@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import ToastProvider from "@/components/providers/ToastProvider";
 import Navbar from "@/components/layout/Navbar";
@@ -18,9 +18,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "Agency - Modern Outsourcing",
-  description: "Full-stack outsourcing agency providing modern web solutions.",
+  title: "GigtechOrbit - AI Automation & Modern Dev",
+  description: "Elite AI automation and software development collective.",
 };
 
 export default function RootLayout({
@@ -32,7 +37,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white min-h-screen flex flex-col cursor-none`}
+        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased bg-black text-white min-h-screen flex flex-col cursor-none`}
       >
         <CustomCursor />
         <ToastProvider />
