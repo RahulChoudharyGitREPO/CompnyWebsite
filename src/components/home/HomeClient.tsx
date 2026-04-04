@@ -219,8 +219,18 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
                 <span className="text-gray-500 text-sm font-black uppercase tracking-widest">Automation + WhatsApp Chat</span>
               </div>
               <div>
-                <h3 className="text-2xl md:text-3xl font-black text-white mb-4 tracking-tight uppercase">AI Automation <br /> (Agents + Chatbots)</h3>
-                <p className="text-gray-400 text-sm md:text-base font-medium leading-relaxed max-w-sm">Build autonomous agents that handle your workflows, customer support, and operations 24/7. Scale your results, not your headcount.</p>
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-4 tracking-tight uppercase">Full AI App Automation</h3>
+                <p className="text-gray-400 text-sm md:text-base font-medium leading-relaxed max-w-sm mb-6">Build autonomous agents that handle your workflows, customer support, and operations 24/7. Scale your results, not your headcount.</p>
+                <div className="flex flex-col gap-1 border-t border-white/10 pt-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Setup</span>
+                    <span className="text-white font-black text-sm">₹80k - ₹1.2L</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Monthly</span>
+                    <span className="text-indigo-400 font-black text-sm">₹40k/mo</span>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </TiltCard>
@@ -242,8 +252,18 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
                 <span className="text-gray-500 text-sm font-black uppercase tracking-widest">Digital Products</span>
               </div>
               <div>
-                <h3 className="text-2xl md:text-3xl font-black text-white mb-4 tracking-tight uppercase">Custom Apps <br /> & Websites + <br /> AI Integrated Workflow</h3>
-                <p className="text-gray-400 text-sm md:text-base font-medium leading-relaxed max-w-sm">High-performance, scalable digital products built with modern tech stacks. We deliver production-ready MVPs in as little as 2 weeks.</p>
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-4 tracking-tight uppercase">Custom Apps & Websites</h3>
+                <p className="text-gray-400 text-sm md:text-base font-medium leading-relaxed max-w-sm mb-6">High-performance, scalable digital products built with modern tech stacks. We deliver production-ready MVPs in as little as 2 weeks.</p>
+                <div className="flex flex-col gap-1 border-t border-white/10 pt-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Setup</span>
+                    <span className="text-white font-black text-sm">₹50k - ₹80k</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Monthly</span>
+                    <span className="text-indigo-400 font-black text-sm">₹30k/mo</span>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </TiltCard>
