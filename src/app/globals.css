@@ -12,24 +12,33 @@
   --foreground: #ffffff;
 }
 
+html,
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, sans-serif;
   overflow-x: hidden;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+main {
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
 }
 
 /* Base modern scrollbar for the blackout look */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: #333333;
-  border-radius: 4px;
+  background: #222222;
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #555555;
+  background: #333333;
 }

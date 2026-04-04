@@ -4,8 +4,6 @@ import "./globals.css";
 import ToastProvider from "@/components/providers/ToastProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import AIAssistant from "@/components/ui/AIAssistant";
-import CustomCursor from "@/components/ui/CustomCursor";
 import LenisProvider from "@/components/providers/LenisProvider";
 
 const geistSans = Geist({
@@ -36,15 +34,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased bg-black text-white min-h-screen flex flex-col cursor-none`}
+        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased bg-black text-white min-h-screen flex flex-col`}
       >
-        <CustomCursor />
         <ToastProvider />
         <LenisProvider>
           <Navbar />
           <main className="flex-grow pt-20">{children}</main>
-          <AIAssistant />
           <Footer />
         </LenisProvider>
       </body>

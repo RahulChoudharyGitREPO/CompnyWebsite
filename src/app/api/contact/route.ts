@@ -6,7 +6,7 @@ export async function POST(req: Request) {
     const { name, email, subject, message } = await req.json();
 
     if (!process.env.RESEND_API_KEY) {
-      console.error("Missing RESEND_API_KEY");
+      console.error("DEBUG: RESEND_API_KEY is missing");
       return NextResponse.json(
         { error: "Email service not configured correctly" },
         { status: 500 }
@@ -16,6 +16,7 @@ export async function POST(req: Request) {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     if (!name || !email || !subject || !message) {
+      console.warn("DEBUG: Missing required fields", { name, email, subject, message });
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -36,9 +37,18 @@ export async function POST(req: Request) {
       `,
     });
 
+    if (data.error) {
+      console.error("DEBUG: Resend API responded with error", data.error);
+      throw new Error(data.error.message || "Resend API error");
+    }
+
     return NextResponse.json({ success: true, data });
   } catch (error: any) {
-    console.error("Resend Error:", error);
+    console.error("DEBUG: High-level Resend Error:", {
+      message: error.message,
+      stack: error.stack,
+      env: process.env.NODE_ENV
+    });
     return NextResponse.json(
       { error: error.message || "Failed to send email" },
       { status: 500 }

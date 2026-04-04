@@ -12,7 +12,7 @@ import MagneticWrapper from "@/components/ui/MagneticWrapper";
 import TiltCard from "@/components/ui/TiltCard";
 import { IProject } from "@/models/Project";
 import { useEffect, useState } from "react";
-import { Sparkles, BrainCircuit, Globe, Smartphone, Hexagon, Cloud, Compass, Code, Video, ImageIcon, PlusCircle } from "lucide-react";
+import { Sparkles, BrainCircuit, Globe, Smartphone, Hexagon, Cloud, Compass, Code, Video, ImageIcon, PlusCircle, LayoutGrid, ExternalLink, MessageCircle } from "lucide-react";
 import Counter from "@/components/ui/Counter";
 import CalendlyEmbed from "@/components/ui/CalendlyEmbed";
 import {
@@ -38,8 +38,10 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
   const [allProjects, setAllProjects] = useState(initialProjects);
   const [isAdmin, setIsAdmin] = useState(initialIsAdmin);
   const [isSaving, setIsSaving] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
+    setHasMounted(true);
     // Sync if server prop changes
     setIsAdmin(initialIsAdmin);
   }, [initialIsAdmin]);
@@ -105,8 +107,10 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
     setAllProjects(prev => prev.filter(p => String(p._id) !== id));
   };
 
+  if (!hasMounted) return <div className="min-h-screen bg-black" />;
+
   return (
-    <div className="flex flex-col w-full overflow-hidden">
+    <div className="flex flex-col w-full overflow-x-hidden">
       
       {/* Interactive Dynamic Background */}
       <motion.div 
@@ -118,7 +122,7 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
       />
 
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-auto min-h-0 md:h-[90vh] flex flex-col items-center justify-start md:justify-center pt-24 md:pt-0 pb-20 md:pb-0 overflow-hidden">
         {/* Animated grid background */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px]">
           <div className="absolute inset-0 bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black_80%)]"></div>
@@ -139,9 +143,9 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            className="text-5xl md:text-[5rem] lg:text-[6rem] xl:text-[7rem] font-black tracking-[-0.02em] mb-8 leading-[1.05] relative w-full"
+            className="text-4xl md:text-[5rem] lg:text-[6rem] xl:text-[7rem] font-black tracking-[-0.02em] mb-8 leading-[1.05] relative w-full"
           >
-            SCALE WITHOUT <span className="text-transparent bg-clip-text bg-gradient-to-br from-zinc-100 via-gray-400 to-zinc-700 animate-gradient-x"><ScrambleText text="THE OVERHEAD" /></span>
+            SCALE WITHOUT <span className="text-transparent bg-clip-text bg-gradient-to-br from-zinc-100 via-gray-400 to-zinc-700 animate-gradient-x">THE OVERHEAD</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
@@ -155,20 +159,20 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex gap-4 relative z-10"
+            className="flex flex-col sm:flex-row gap-4 relative z-10 w-full sm:w-auto px-6 sm:px-0"
           >
             <MagneticWrapper>
               <Link
                 href="#booking"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-bold uppercase tracking-wider text-sm rounded-sm hover:-translate-y-1 transition-transform shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-black font-bold uppercase tracking-wider text-sm rounded-2xl hover:-translate-y-1 transition-transform shadow-[0_0_20px_rgba(255,255,255,0.1)] w-full sm:w-auto"
               >
                 Book a Demo
               </Link>
             </MagneticWrapper>
             <MagneticWrapper>
               <Link
-                href="#booking"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/20 text-white font-bold uppercase tracking-wider text-sm rounded-sm hover:bg-white/5 transition-colors"
+                href="https://wa.me/919693975542?text=Hi%20GigtechOrbit%2C%20I%20want%20to%20schedule%20an%20AI%20Strategy%20Call."
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/20 text-white font-bold uppercase tracking-wider text-sm rounded-2xl hover:bg-white/5 transition-colors w-full sm:w-auto"
               >
                 <BrainCircuit size={18} /> Schedule Strategy Call
               </Link>
@@ -187,157 +191,65 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
       <section className="py-32 px-6 max-w-7xl mx-auto w-full relative z-10">
         <div className="mb-12">
           <h2 className="text-3xl md:text-5xl font-semibold tracking-tight uppercase text-white">
-            <ScrambleText text="CORE CAPABILITIES" />
+            CORE CAPABILITIES
           </h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[300px]">
-          {/* Card 01: WhatsApp Automation */}
-          <TiltCard className="md:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 auto-rows-auto">
+          {/* Card 01: AI Automation */}
+          <TiltCard className="h-full">
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -60, scale: 0.9 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
               whileHover={{ y: -5, borderColor: "rgba(255,255,255,0.2)", backgroundColor: "rgba(34, 34, 34, 1)" }}
-              viewport={{ once: true }}
-              className="bg-[#1b1b1b] rounded-sm p-8 flex flex-col justify-between group transition-all duration-300 h-full border border-white/5"
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ type: "spring", damping: 20, stiffness: 100 }}
+              className="bg-[#1b1b1b] rounded-3xl p-10 flex flex-col justify-between group transition-all duration-300 h-full border border-white/5"
             >
-              <div className="flex justify-between items-start">
-                <BrainCircuit className="w-8 h-8 text-white/90" />
-                <span className="text-gray-500 text-sm font-medium uppercase tracking-tighter">Autonomous Ops</span>
+              <div className="flex justify-between items-start mb-8">
+                <div className="relative">
+                  <motion.div 
+                    animate={{ y: [0, -4, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="p-4 bg-white/5 rounded-2xl border border-white/10 group-hover:bg-white text-white group-hover:text-black transition-all"
+                  >
+                    <BrainCircuit className="w-10 h-10" />
+                  </motion.div>
+                </div>
+                <span className="text-gray-500 text-sm font-black uppercase tracking-widest">Automation + WhatsApp Chat</span>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white mb-2 tracking-wide uppercase">AI Agent Workforces</h3>
-                <p className="text-gray-400 text-xs font-medium leading-relaxed">Deploy custom agents that handle customer support, booking logic, and payment reconciliations autonomously. Reduce manual workload by up to 40%.</p>
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-4 tracking-tight uppercase">AI Automation <br /> (Agents + Chatbots)</h3>
+                <p className="text-gray-400 text-sm md:text-base font-medium leading-relaxed max-w-sm">Build autonomous agents that handle your workflows, customer support, and operations 24/7. Scale your results, not your headcount.</p>
               </div>
             </motion.div>
           </TiltCard>
 
-          {/* Card 02: Business Dashboards */}
-          <TiltCard className="md:col-span-2">
+          {/* Card 02: Custom Apps & Websites */}
+          <TiltCard className="h-full">
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: 60, scale: 0.9 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
               whileHover={{ y: -5, borderColor: "rgba(255,255,255,0.2)", backgroundColor: "rgba(34, 34, 34, 1)" }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="bg-[#1b1b1b] rounded-sm p-8 flex flex-col justify-between group transition-all duration-300 h-full border border-white/5"
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ type: "spring", damping: 20, stiffness: 100, delay: 0.1 }}
+              className="bg-[#1b1b1b] rounded-3xl p-10 flex flex-col justify-between group transition-all duration-300 h-full border border-white/5"
             >
-              <div className="flex justify-between items-start">
-                <Code className="w-8 h-8 text-white/90" />
-                <span className="text-gray-500 text-sm font-medium uppercase tracking-tighter">Velocity</span>
+              <div className="flex justify-between items-start mb-8">
+                <div className="p-4 bg-white/5 rounded-2xl border border-white/10 group-hover:bg-white text-white group-hover:text-black transition-all">
+                  <Code className="w-10 h-10" />
+                </div>
+                <span className="text-gray-500 text-sm font-black uppercase tracking-widest">Digital Products</span>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white mb-2 tracking-wide uppercase">Extended Tech Team</h3>
-                <p className="text-gray-400 text-xs font-medium leading-relaxed">Scale your product faster with our elite engineers. We build, maintain, and scale your tech stack at 2x the speed of traditional hiring.</p>
+                <h3 className="text-2xl md:text-3xl font-black text-white mb-4 tracking-tight uppercase">Custom Apps <br /> & Websites + <br /> AI Integrated Workflow</h3>
+                <p className="text-gray-400 text-sm md:text-base font-medium leading-relaxed max-w-sm">High-performance, scalable digital products built with modern tech stacks. We deliver production-ready MVPs in as little as 2 weeks.</p>
               </div>
-            </motion.div>
-          </TiltCard>
-
-          {/* Card 03: App & Web Dev */}
-          <TiltCard className="md:col-span-1">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -5, borderColor: "rgba(255,255,255,0.2)", backgroundColor: "rgba(21, 21, 21, 1)" }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="bg-[#111] rounded-sm p-8 flex flex-col justify-between group transition-all duration-300 h-full border border-white/5"
-            >
-              <div className="flex justify-between items-start">
-                <Cloud className="w-6 h-6 text-white/70" />
-                <span className="text-gray-600 text-xs font-bold uppercase">SaaS</span>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-white mb-1 uppercase tracking-tight">SaaS Infrastructure</h3>
-              </div>
-            </motion.div>
-          </TiltCard>
-
-          {/* Card 04: Fintech */}
-          <TiltCard className="md:col-span-1">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -5, borderColor: "rgba(255,255,255,0.2)", backgroundColor: "rgba(21, 21, 21, 1)" }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="bg-[#111] rounded-sm p-8 flex flex-col justify-between group transition-all duration-300 h-full border border-white/5"
-            >
-              <div className="flex justify-between items-start">
-                <Globe className="w-6 h-6 text-white/70" />
-                <span className="text-gray-600 text-xs font-bold uppercase">Fintech</span>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-white mb-1 uppercase tracking-tight">Payment Workflows</h3>
-              </div>
-            </motion.div>
-          </TiltCard>
-
-          {/* Card 05: MVP */}
-          <TiltCard className="md:col-span-1">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -5, borderColor: "rgba(255,255,255,0.2)", backgroundColor: "rgba(21, 21, 21, 1)" }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="bg-[#111] rounded-sm p-8 flex flex-col justify-between group transition-all duration-300 h-full border border-white/5"
-            >
-              <div className="flex justify-between items-start">
-                <Smartphone className="w-6 h-6 text-white/70" />
-                <span className="text-gray-600 text-xs font-bold uppercase">Agile</span>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-white mb-1 uppercase tracking-tight">Rapid MVP Builds</h3>
-              </div>
-            </motion.div>
-          </TiltCard>
-
-          {/* Card 06: Data */}
-          <TiltCard className="md:col-span-1">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -5, borderColor: "rgba(255,255,255,0.2)", backgroundColor: "rgba(21, 21, 21, 1)" }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
-              className="bg-[#111] rounded-sm p-8 flex flex-col justify-between group transition-all duration-300 h-full border border-white/5"
-            >
-              <div className="flex justify-between items-start">
-                <ImageIcon className="w-6 h-6 text-white/70" />
-                <span className="text-gray-600 text-xs font-bold uppercase">Analytics</span>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-white mb-1 uppercase tracking-tight">Business Intelligence</h3>
-              </div>
-            </motion.div>
-          </TiltCard>
-
-          {/* Card 07: Big Custom AI Section */}
-          <TiltCard className="md:col-span-4">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.01, boxShadow: "0 0 30px rgba(255,255,255,0.05)" }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
-              className="bg-white rounded-sm p-10 flex flex-col justify-between transition-all duration-300 h-full shadow-[0_0_40px_rgba(255,255,255,0.05)]"
-            >
-               <div className="flex justify-between items-start">
-                 <Hexagon className="w-8 h-8 text-black fill-black/90 scale-110" />
-                 <span className="text-gray-400 text-sm font-black uppercase tracking-widest">Enterprise Ready</span>
-               </div>
-               <div>
-                 <h3 className="text-[32px] font-black text-black mb-4 tracking-[-0.03em] leading-none uppercase">AI AGENTS THAT DRIVE REVENUE</h3>
-                 <p className="text-gray-600 text-sm font-medium leading-relaxed max-w-2xl">We don't just build chatbots. We architect intelligent agents that integrate into your core stack—resolving failed payments, managing complex bookings, and automating high-value business workflows so your team can focus on growth.</p>
-               </div>
             </motion.div>
           </TiltCard>
         </div>
       </section>
 
-      {/* Testimonials Marquee */}
-      <TestimonialMarquee />
 
       {/* Projects Section - Hidden for now
       <section id="projects" className="py-32 px-6 max-w-7xl mx-auto w-full relative z-10">
@@ -443,7 +355,7 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-5xl md:text-7xl font-black tracking-tighter mb-10 uppercase"
+            className="text-3xl md:text-7xl font-black tracking-tighter mb-10 uppercase"
           >
             IS YOUR GROWTH BOTTLENECKED?
           </motion.h2>
@@ -463,8 +375,8 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
       <section className="py-32 px-6 bg-black relative z-10 border-t border-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="mb-20">
-            <h2 className="text-3xl md:text-5xl font-semibold tracking-tight uppercase text-white">
-              <ScrambleText text="HOW WE SCALE YOU" />
+            <h2 className="text-2xl md:text-5xl font-semibold tracking-tight uppercase text-white">
+              HOW WE SCALE YOU
             </h2>
           </div>
 
@@ -497,7 +409,7 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-8">
+              <h2 className="text-3xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-8">
                 RESULTS DRIVEN BY <span className="text-gray-400">INTELLIGENCE.</span>
               </h2>
               <div className="space-y-8">
@@ -517,7 +429,7 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
                 </div>
               </div>
             </div>
-            <div className="bg-gray-50 p-8 rounded-sm border border-black/5 shadow-2xl">
+            <div className="bg-gray-50 p-8 rounded-3xl border border-black/5 shadow-2xl">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-3 h-3 rounded-full bg-red-500" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500" />
@@ -537,112 +449,7 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
         </div>
       </section>
 
-      {/* Updated Pricing Section */}
-      <section className="py-32 px-6 bg-black relative z-10 border-t border-white/5">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-sm font-bold tracking-[0.2em] text-indigo-400 mb-4 uppercase">Flex Engagement</h2>
-            <h3 className="text-4xl md:text-6xl font-black text-white uppercase">Engagement Models</h3>
-          </div>
 
-          <motion.div 
-            whileHover={{ y: -10, borderColor: "rgba(255,255,255,0.2)" }}
-            transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          >
-            {/* Package 01: Starter */}
-            <div className="bg-[#0a0a0a] border border-white/5 p-8 rounded-sm flex flex-col justify-between transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.03)] group">
-              <div>
-                <h4 className="text-xl font-bold text-white mb-2 underline decoration-white/20 underline-offset-8 uppercase tracking-widest">Pilot</h4>
-                <p className="text-2xl font-black text-white my-6">Launch Your First AI Agent in 14 Days</p>
-                <p className="text-gray-500 text-sm mb-8 font-medium italic">Fast entry / low risk intervention.</p>
-                <ul className="space-y-4 mb-10">
-                  {["Automate 1 Core Workflow", "Reduce Manual Workload", "Quick 14-Day Deployment", "Direct Strategy Support"].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-gray-400 text-sm font-medium">
-                      <div className="w-1 h-1 bg-white/40 rounded-full" /> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <Link href="#booking" className="w-full py-4 border border-white/10 text-white font-bold uppercase tracking-widest text-xs text-center hover:bg-white/5 transition-colors">Start Pilot</Link>
-            </div>
- 
-            {/* Package 02: Scale */}
-            <div className="relative bg-[#0a0a0a] border-2 border-white/20 p-8 rounded-sm flex flex-col justify-between scale-105 z-10 shadow-[0_0_50px_rgba(255,255,255,0.05)] transition-all duration-300 hover:scale-[1.07] hover:shadow-[0_0_60px_rgba(255,255,255,0.08)] group">
-              <div className="absolute top-0 right-0 bg-white text-black px-4 py-1.5 font-black uppercase text-[10px] tracking-widest">Most Popular</div>
-              <div>
-                <h4 className="text-xl font-bold text-white mb-2 underline decoration-white/40 underline-offset-8 uppercase italic tracking-widest">Scale</h4>
-                <p className="text-2xl font-black text-white my-6">Scale Faster with AI + Dedicated Tech Team</p>
-                <p className="text-gray-400 text-sm mb-8 font-semibold uppercase tracking-tighter">For growth-stage startups</p>
-                <ul className="space-y-4 mb-10">
-                  {["AI Support & Workflow Automation", "Extended Tech Team (Monthly)", "Faster Feature Delivery", "Scale Without Hiring Heads", "Priority Strategic Support"].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-white text-sm font-bold">
-                      <div className="w-1.5 h-1.5 bg-white/40 rounded-full" /> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <MagneticWrapper>
-                <Link href="#booking" className="w-full py-5 bg-white text-black font-black uppercase tracking-widest text-xs text-center block">Book Free Demo</Link>
-              </MagneticWrapper>
-            </div>
-
-            {/* Package 03: Custom */}
-            <div className="bg-[#0a0a0a] border border-white/5 p-8 rounded-sm flex flex-col justify-between transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.03)] group">
-              <div>
-                <h4 className="text-xl font-bold text-white mb-2 underline decoration-white/20 underline-offset-8 uppercase tracking-widest">Custom</h4>
-                <p className="text-2xl font-black text-white my-6">Custom AI Systems for Complex Business Needs</p>
-                <p className="text-gray-500 text-sm mb-8 font-medium italic">Advanced enterprise solutions.</p>
-                <ul className="space-y-4 mb-10">
-                  {["Fully Custom Workflow Ops", "Bespoke System Engineering", "Deep Product Integrations", "Long-term Maintenance & Support", "24/7 Strategic Partnership"].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-gray-400 text-sm font-medium">
-                      <div className="w-1 h-1 bg-white/40 rounded-full" /> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <Link href="#booking" className="w-full py-4 border border-white/10 text-white font-bold uppercase tracking-widest text-xs text-center hover:bg-white/5 transition-colors">Schedule Strategy Call</Link>
-            </div>
-          </motion.div>
-
-          {/* Add-on Services & Retainer */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/5 pt-20">
-            <div className="bg-[#050505] p-8 rounded-sm border border-white/5">
-              <h4 className="text-white font-black uppercase tracking-widest text-xs mb-8 flex items-center gap-3">
-                <Sparkles size={16} className="text-indigo-400" /> Use Cases
-              </h4>
-              <div className="space-y-4">
-                {[
-                  "AI Powered Customer Success",
-                  "Automated Booking Workflows",
-                  "Smart Payment Reconciliation",
-                  "Internal Process Automation",
-                ].map((useCase, i) => (
-                  <div key={i} className="flex justify-between items-center border-b border-white/[0.03] pb-3">
-                    <span className="text-gray-400 text-sm font-medium">{useCase}</span>
-                    <span className="w-2 h-2 bg-white/40 rounded-full" />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-[#0a0a0a] p-10 rounded-sm border-l-4 border-white/40 flex flex-col justify-center">
-              <h4 className="text-white font-black uppercase tracking-widest text-xs mb-8">Premium Engagement</h4>
-              <div className="space-y-6">
-                <div>
-                   <h5 className="text-white font-bold text-lg mb-1">App / Product Development</h5>
-                   <p className="text-gray-400 text-sm">Starting from ₹30k+</p>
-                </div>
-                <div>
-                   <h5 className="text-white font-bold text-lg mb-1">AI Agent Systems</h5>
-                   <p className="text-gray-400 text-sm mb-8 leading-relaxed font-medium italic">Keep your systems sharp. Includes technical maintenance, regular model fine-tuning, bug fixes, and on-call product support.</p>
-                   <Link href="#booking" className="text-white/40 text-xs font-black uppercase tracking-widest hover:text-white transition-colors inline-block">Schedule Systems Audit →</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Improved Calendly Booking Section */}
       <section id="booking" className="py-32 px-6 bg-[#050505] relative z-10 border-t border-white/5 overflow-hidden">
@@ -654,7 +461,7 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
             {/* Left Content */}
             <div className="text-left">
               <h2 className="text-sm font-bold tracking-[0.2em] text-white/40 mb-6 uppercase">Direct Strategy Access</h2>
-              <h3 className="text-4xl md:text-6xl font-black text-white uppercase leading-tight mb-8">
+              <h3 className="text-3xl md:text-6xl font-black text-white uppercase leading-tight mb-8">
                 Book Your AI <br /> Strategy Session
               </h3>
               <p className="text-gray-400 text-lg mb-10 max-w-xl leading-relaxed">
@@ -676,6 +483,8 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
                   </div>
                 ))}
               </div>
+              
+
               
               <div className="pt-8 border-t border-white/10 inline-block">
                 <p className="text-white font-bold uppercase tracking-widest text-xs mb-2">Trusted by Innovation Teams</p>
@@ -704,9 +513,9 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-4xl md:text-6xl font-bold mb-8 uppercase tracking-tighter"
+          className="text-3xl md:text-6xl font-bold mb-8 uppercase tracking-tighter"
         >
-          <ScrambleText text="Ready to automate your operations?" />
+          Ready to automate your operations?
         </motion.h2>
         <motion.div
            initial={{ opacity: 0, scale: 0.9 }}
@@ -716,12 +525,12 @@ export default function HomeClient({ projects: initialProjects, isAdmin: initial
            className="flex flex-col md:flex-row gap-6 justify-center items-center"
         >
           <MagneticWrapper>
-            <Link href="#booking" className="relative group inline-flex items-center justify-center px-10 py-5 bg-white text-black font-bold uppercase tracking-wider rounded-sm text-lg hover:bg-gray-200 transition-colors overflow-hidden">
+            <Link href="#booking" className="relative group inline-flex items-center justify-center px-10 py-5 bg-white text-black font-bold uppercase tracking-wider rounded-2xl text-lg hover:bg-gray-200 transition-colors overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
               <span className="relative z-10">Book a Demo</span>
             </Link>
           </MagneticWrapper>
-          <Link href="#booking" className="text-white font-bold uppercase tracking-widest text-sm hover:underline decoration-white/40 underline-offset-8">
+          <Link href="https://wa.me/919693975542?text=I'd%20like%20to%20schedule%20a%20strategy%20call%20about%20my%20workflows." className="text-white font-bold uppercase tracking-widest text-sm hover:underline decoration-white/40 underline-offset-8">
             Schedule a Call
           </Link>
         </motion.div>

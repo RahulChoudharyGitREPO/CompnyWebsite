@@ -40,8 +40,8 @@ export default function Navbar() {
             </Link>
           ))}
           <Link
-            href="/contact"
-            className="px-5 py-2.5 text-sm bg-white text-black font-medium hover:bg-gray-200 transition-colors"
+            href="https://wa.me/919693975542?text=Hello%20GigtechOrbit%2C%20I'd%20like%20to%20discuss%20a%20new%20project."
+            className="px-5 py-2.5 text-sm bg-white text-black font-medium hover:bg-gray-200 transition-colors rounded-2xl"
           >
             Get in touch
           </Link>

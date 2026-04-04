@@ -24,8 +24,8 @@ export default function Footer() {
         
         <div className="flex gap-8 text-sm text-gray-400">
           <Link href="/about" className="hover:text-white transition-colors">About</Link>
-          <Link href="#booking" className="hover:text-white transition-colors">Schedule a Call</Link>
-          <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
+          <Link href="https://wa.me/919693975542?text=Hello%20GigtechOrbit%2C%20I'd%20like%20to%20schedule%20a%20call." className="hover:text-white transition-colors">Schedule a Call</Link>
+          <Link href="https://wa.me/919693975542?text=Hi%20GigtechOrbit%2C%20I%20have%20a%20query%20about%20your%20services." className="hover:text-white transition-colors">Contact</Link>
           <Link href="/admin/login" className="hover:text-white transition-colors">Admin</Link>
         </div>
       </div>
